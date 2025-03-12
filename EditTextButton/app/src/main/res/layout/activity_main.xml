@@ -28,9 +28,13 @@
             android:hint="Isikan nama anda" />
 
         <Button
+            android:id="@+id/okButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            />
+            android:text="OK" />
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoTextView" />
 </LinearLayout>
