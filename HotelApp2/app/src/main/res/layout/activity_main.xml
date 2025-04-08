@@ -24,7 +24,6 @@
             android:orientation="vertical"
             android:padding="8dp"
             android:background="#a00"
-            android:layout_gravity="top|right"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp">
             <TextView
@@ -63,16 +62,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in vestibulum risus. Sed facilisis at purus nec commodo. Nunc tincidunt euismod ultrices. Morbi a pretium purus, nec viverra quam. Cras euismod arcu vel auctor malesuada. Nulla pellentesque venenatis ornare. Aenean consequat dui sit amet libero ornare finibus a sit amet ex. Phasellus pulvinar sem odio, euismod feugiat sapien pellentesque id. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent tempor pulvinar interdum. Suspendisse eros leo, mattis ut turpis sagittis, bibendum hendrerit nisi. Curabitur finibus finibus turpis, nec tincidunt augue consequat sed.Mauris lobortis ultricies eros, nec vestibulum erat. Sed finibus odio a maximus blandit. Donec hendrerit, metus nec blandit ultrices, nibh tortor dictum urna, vitae bibendum ipsum diam vehicula metus. Curabitur vulputate euismod augue fermentum molestie. Ut non enim hendrerit, efficitur elit sit amet, elementum est. Phasellus rhoncus, diam et fermentum posuere, justo mauris iaculis mi, nec tincidunt quam ex at leo. Donec vel nunc nisl. Vestibulum vitae mauris a sapien euismod porttitor. Pellentesque tincidunt dictum arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ex lectus, tincidunt non blandit id, facilisis eu augue. Nam ante ante, faucibus non nisi sed, dapibus varius nisl.">
+                android:text="Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:textSize="16sp"
+                android:gravity="center">
             </TextView>
         </LinearLayout>
     </ScrollView>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_dynamic_neutral40"
+        android:background="@color/design_default_color_primary"
         android:textColor="#ffffff"
         android:text="Book Now!!!"></Button>
 </LinearLayout>

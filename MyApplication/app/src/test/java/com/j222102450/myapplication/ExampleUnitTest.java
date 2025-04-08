@@ -1,4 +1,4 @@
-package com.j222102450.hotelapp;
+package com.j222102450.myapplication;
 
 import org.junit.Test;
 

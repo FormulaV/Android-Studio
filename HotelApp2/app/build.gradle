@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace 'com.j222102450.hotelapp'
+    namespace 'com.stevanlim222102453.hotelapp'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.j222102450.hotelapp"
-        minSdk 24
+        applicationId "com.stevanlim222102453.hotelapp"
+        minSdk 21
         targetSdk 35
         versionCode 1
         versionName "1.0"
