@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Hotel App"
+rootProject.name = "HotelApp"
 include ':app'
