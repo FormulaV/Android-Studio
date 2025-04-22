@@ -18,6 +18,7 @@
             android:background="@color/cardview_dark_background">
             <EditText
                 android:layout_width="0dp"
+                android:id="@+id/txtSearch"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableStart="@android:drawable/ic_menu_search"
