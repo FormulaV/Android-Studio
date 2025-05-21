@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadRecyclerView() {
         AsyncHttpClient ahc = new AsyncHttpClient();
-        String url = "https://stmikpontianak.net/011100862/tampilMahasiswa.php";
+        String url = "https://stmikpontianak.cloud/011100862/tampilMahasiswa.php";
 
         ahc.get(url, new AsyncHttpResponseHandler() {
             @Override
