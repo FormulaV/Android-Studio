@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -14,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CuacaAdapter {
+public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
     private List<ListModel> listModelList;
     private RootModel rm;
 

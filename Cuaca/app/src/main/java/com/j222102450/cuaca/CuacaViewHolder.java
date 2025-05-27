@@ -4,7 +4,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CuacaViewHolder {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class CuacaViewHolder extends RecyclerView.ViewHolder {
     public ImageView cuacaImageView;
     public TextView namaTextView, deskripsiTextView, tglWaktuTextView, suhuTextView;
 

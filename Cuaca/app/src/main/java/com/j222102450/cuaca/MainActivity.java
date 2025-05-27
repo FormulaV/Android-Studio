@@ -50,31 +50,31 @@ public class MainActivity extends AppCompatActivity {
         _totalTextView = findViewById(R.id.totalTextView);
 
         initSwipeRefreshLayout();
-        initButtonViewCityInfo();
+//        initButtonViewCityInfo();
         bindRecyclerView1();
     }
 
-    private void initButtonViewCityInfo() {
-        _buttonViewCityInfo = findViewById(R.id.buttonView_cityInfo);
-
-        _buttonViewCityInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CityModel cm = _rootModel.getCityModel();
-                CoordModel com = cm.getCoordModel();
-                double latitude = com.getLat();
-                double longitude = com.getLon();
-
-                Bundle param = nem Bundle();
-                param.putDouble("lat", latitude);
-                param.putDouble("lon", longitude);
-
-                Intent intent = new Intent(MainActivity.this, GpsActivity.class);
-                intent.putExtra("param", param);
-                startActivity(intent);
-            }
-        });
-    }
+//    private void initButtonViewCityInfo() {
+//        _buttonViewCityInfo = findViewById(R.id.buttonView_cityInfo);
+//
+//        _buttonViewCityInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CityModel cm = _rootModel.getCityModel();
+//                CoordModel com = cm.getCoordModel();
+//                double latitude = com.getLat();
+//                double longitude = com.getLon();
+//
+//                Bundle param = new Bundle();
+//                param.putDouble("lat", latitude);
+//                param.putDouble("lon", longitude);
+//
+//                Intent intent = new Intent(MainActivity.this, GpsActivity.class);
+//                intent.putExtra("param", param);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
     private void initSwipeRefreshLayout()
     {
@@ -132,6 +132,6 @@ public class MainActivity extends AppCompatActivity {
                 "Matahari Terbit: " + sunriseTime + " (Lokal)\n" +
                 "Matahari Terbenam: " + sunsetTime + "(Lokal)";
 
-        _buttonViewCityInfo.setText(cityInfo);
+//        _buttonViewCityInfo.setText(cityInfo);
     }
 }
