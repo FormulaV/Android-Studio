@@ -15,7 +15,16 @@
         android:theme="@style/Theme.Login"
         tools:targetApi="31">
         <activity
+            android:name=".TampilMahasiswaActivity"
+            android:label="Tampil Mahasiswa"
+            android:exported="false" />
+        <activity
+            android:name=".TambahMahasiswaActivity"
+            android:label="Tambah Mahasiswa"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
+            android:label="Menu"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

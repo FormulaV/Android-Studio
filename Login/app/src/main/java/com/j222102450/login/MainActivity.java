@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,14 +53,25 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String hasil = new String(responseBody);
 
-                        
+//                        Toast.makeText(getApplicationContext(), new String(responseBody), Toast.LENGTH_SHORT).show();
+
+                        if (!hasil.equals("[{\"idCount\":\"1\"}]"))
+                        {
+                            Toast.makeText(getApplicationContext(), "ID dan password anda tidak cocok", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        Toast.makeText(getApplicationContext(), "Selamat Datang, " + _id, Toast.LENGTH_SHORT).show();
+
+                        _menuIntent = new Intent(getApplicationContext(), MenuActivity.class);
+                        startActivity(_menuIntent);
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                })
+                });
             }
         });
     }
