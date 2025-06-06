@@ -3,6 +3,7 @@ package com.j222102450.cuaca;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -109,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
                 _recyclerView1.setAdapter(ca);
 
                 _totalTextView.setText("Total Record : " + ca.getItemCount());
+                Log.d("jsp", "_rootModel: " + _rootModel);
+                Log.d("jsp", "CityModel: " + (_rootModel.getCityModel() != null));
+                Log.d("jsp", "CoordModel: " + (_rootModel.getCityModel() != null ? _rootModel.getCityModel().getCoordModel() : null));
+
             }
 
             @Override

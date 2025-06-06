@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -113,6 +114,12 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
         holder.deskripsiTextView.setText(wm.getDescription());
         holder.tglWaktuTextView.setText(tanggalWaktuWib);
         holder.suhuTextView.setText(suhu);
+
+//        holder.buttonViewCityInfo.setText("Lihat");
+//        holder.buttonViewCityInfo.setOnClickListener(v -> {
+//            Toast.makeText(v.getContext(), "Klik kota: " + lm.getDt_txt(), Toast.LENGTH_SHORT).show();
+//        });
+
     }
 
     @Override
