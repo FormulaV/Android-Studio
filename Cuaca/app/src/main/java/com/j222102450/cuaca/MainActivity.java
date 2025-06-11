@@ -109,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                 _recyclerView1.setAdapter(ca);
 
                 _totalTextView.setText("Total Record : " + ca.getItemCount());
+                Log.d("jsp", "_rootModel: " + _rootModel);
+                Log.d("jsp", "CityModel: " + (_rootModel.getCityModel() != null));
+                Log.d("jsp", "CoordModel: " + (_rootModel.getCityModel() != null ? _rootModel.getCityModel().getCoordModel() : null));
+
             }
 
             @Override
