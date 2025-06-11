@@ -18,6 +18,17 @@
         android:drawableRight="@drawable/img_dollar_128"
         android:text="Forex 1"
         android:textColor="#fff"></Button>
+
+    <Button
+        android:id="@+id/tampilForexButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/img_dollar_128"
+        android:text="Forex 2"
+        android:textColor="#fff"></Button>
+
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"

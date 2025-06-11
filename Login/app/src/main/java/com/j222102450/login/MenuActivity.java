@@ -12,8 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MenuActivity extends AppCompatActivity {
-    private Button _tampilMahasiswaButton, _tampilForexButton, _tampilCuacaButton;
-    private Intent _tampilMahasiswaIntent, _tampilForexIntent, _tampilCuacaIntent;
+    private Button _tampilMahasiswaButton, _tampilForexButton, _tampilCuacaButton, _tampilForexButton2;
+    private Intent _tampilMahasiswaIntent, _tampilForexIntent, _tampilCuacaIntent, _tampilForexIntent2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class MenuActivity extends AppCompatActivity {
         initTampilMahasiswaButton();
         initTampilForexButton();
         initTampilCuacaButton();
+        initTampilForexButton2();
     }
 
     private void initTampilMahasiswaButton()
@@ -57,6 +58,21 @@ public class MenuActivity extends AppCompatActivity {
             {
                 _tampilForexIntent = new Intent(getApplicationContext(), ForexMainActivity.class);
                 startActivity(_tampilForexIntent);
+            }
+        });
+    }
+
+    private void initTampilForexButton2()
+    {
+        _tampilForexButton2 = (Button) findViewById(R.id.tampilForexButton2);
+
+        _tampilForexButton2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                _tampilForexIntent2 = new Intent(getApplicationContext(), ForexMainActivity2.class);
+                startActivity(_tampilForexIntent2);
             }
         });
     }

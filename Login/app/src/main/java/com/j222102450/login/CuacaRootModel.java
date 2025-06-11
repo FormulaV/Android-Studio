@@ -7,7 +7,8 @@ import java.util.List;
 public class CuacaRootModel {
     @SerializedName("list")
     private List<CuacaListModel> listModelList;
-
+    @SerializedName("city")
+    private CuacaCityModel cityModel;
     public CuacaRootModel() { }
 
     public List<CuacaListModel> getListModelList() {
@@ -18,4 +19,11 @@ public class CuacaRootModel {
         this.listModelList = listModelList;
     }
 
+    public CuacaCityModel getCityModel() {
+        return cityModel;
+    }
+
+    public void setCityModel(CuacaCityModel cityModel) {
+        this.cityModel = cityModel;
+    }
 }

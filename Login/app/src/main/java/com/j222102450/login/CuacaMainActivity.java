@@ -3,6 +3,7 @@ package com.j222102450.login;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,8 +30,10 @@ import cz.msebera.android.httpclient.Header;
 
 public class CuacaMainActivity extends AppCompatActivity {
     private RecyclerView _recyclerView2;
+    private CuacaRootModel _rootModel;
     private SwipeRefreshLayout _swipeRefreshLayout2;
-    private TextView _totalTextView;
+    private TextView _totalTextView, _buttonViewCityInfo;
+
     @SuppressLint("MissingInflateId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,34 @@ public class CuacaMainActivity extends AppCompatActivity {
         });
 
         _recyclerView2 = findViewById(R.id.recyclerView2);
-        _swipeRefreshLayout2 = findViewById(R.id.swipeRefreshLayout2);
+        _totalTextView = findViewById(R.id.totalTextView);
 
         initSwipeRefreshLayout();
-        bindRecyclerView2();
+        initButtonViewCityInfo();
+        bindRecyclerView1();
     }
 
+    private void initButtonViewCityInfo() {
+        _buttonViewCityInfo = findViewById(R.id.textView_cityInfo);
+
+        _buttonViewCityInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CuacaCityModel cm = _rootModel.getCityModel();
+                CuacaCoordModel com = cm.getCoordModel();
+                double latitude = com.getLat();
+                double longitude = com.getLon();
+
+                Bundle param = new Bundle();
+                param.putDouble("lat", latitude);
+                param.putDouble("lon", longitude);
+
+                Intent intent = new Intent(CuacaMainActivity.this, CuacaGpsActivity.class);
+                intent.putExtra("param", param);
+                startActivity(intent);
+            }
+        });
+    }
 
     private void initSwipeRefreshLayout()
     {
@@ -58,14 +83,14 @@ public class CuacaMainActivity extends AppCompatActivity {
         _swipeRefreshLayout2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bindRecyclerView2();
+                bindRecyclerView1();
                 _swipeRefreshLayout2.setRefreshing(false);
             }
         });
     }
 
-    private void bindRecyclerView2() {
-        _swipeRefreshLayout2.setRefreshing(true);
+    private void bindRecyclerView1()
+    {
         String url = "https://api.openweathermap.org/data/2.5/forecast?id=1630789&appid=c066400094976a3781669abd1338c074";
         AsyncHttpClient ahc = new AsyncHttpClient();
 
@@ -73,23 +98,40 @@ public class CuacaMainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Gson gson = new Gson();
-                CuacaRootModel rm = gson.fromJson(new String(responseBody), CuacaRootModel.class);
+                _rootModel = gson.fromJson(new String(responseBody), CuacaRootModel.class);
 
+                initCityInfo();
 
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(CuacaMainActivity.this);
                 _recyclerView2.setLayoutManager(lm);
 
-                CuacaAdapter ca = new CuacaAdapter(CuacaMainActivity.this, rm);
+                CuacaAdapter ca = new CuacaAdapter(CuacaMainActivity.this, _rootModel);
                 _recyclerView2.setAdapter(ca);
 
-                _swipeRefreshLayout2.setRefreshing(false);
+                _totalTextView.setText("Total Record : " + ca.getItemCount());
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                _swipeRefreshLayout2.setRefreshing(false);
             }
         });
+    }
+
+    private void initCityInfo() {
+        CuacaCityModel cm = _rootModel.getCityModel();
+        long sunrise = cm.getSunrise();
+        long sunset = cm.getSunset();
+        String cityName = cm.getName();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        String sunriseTime = sdf.format(new Date(sunrise * 1000));
+        String sunsetTime = sdf.format(new Date(sunset * 1000));
+
+        String cityInfo = "Kota: " + cityName + "\n" +
+                "Matahari Terbit: " + sunriseTime + " (Lokal)\n" +
+                "Matahari Terbenam: " + sunsetTime + "(Lokal)";
+
+        _buttonViewCityInfo.setText(cityInfo);
     }
 }

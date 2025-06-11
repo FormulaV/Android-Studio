@@ -21,11 +21,11 @@ import java.util.List;
 public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
     private Activity _activity;
     private List<CuacaListModel> listModelList;
-    private CuacaRootModel rm;
+    private CuacaRootModel _rootmodel;
 
     public CuacaAdapter(Activity activity, CuacaRootModel rm) {
         this._activity = activity;
-        this.rm = rm;
+        this._rootmodel = rm;
 
         listModelList = rm.getListModelList();
     }

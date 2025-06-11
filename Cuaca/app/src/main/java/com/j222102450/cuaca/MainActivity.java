@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView _recyclerView1;
     private RootModel _rootModel;
     private SwipeRefreshLayout _swipeRefreshLayout1;
-    private TextView _totalTextView;
-    private Button _buttonViewCityInfo;
+    private TextView _totalTextView, _buttonViewCityInfo;
 
     @SuppressLint("MissingInflateId")
     @Override
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initButtonViewCityInfo() {
-        _buttonViewCityInfo = findViewById(R.id.buttonView_cityInfo);
+        _buttonViewCityInfo = findViewById(R.id.textView_cityInfo);
 
         _buttonViewCityInfo.setOnClickListener(new View.OnClickListener() {
             @Override
