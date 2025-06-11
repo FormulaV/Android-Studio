@@ -8,15 +8,16 @@
     tools:context=".MenuActivity"
     android:columnCount="1"
     android:background="@drawable/gradient_a">
+
     <Button
-        android:layout_height="wrap_content"
+        android:id="@+id/tampilForexButton"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_columnWeight="1"
         android:background="@android:color/transparent"
-        android:drawableRight="@drawable/img_teenagers_128"
-        android:textColor="#fff"
-        android:text="Master Pemakai">
-    </Button>
+        android:drawableRight="@drawable/img_dollar_128"
+        android:text="Forex 1"
+        android:textColor="#fff"></Button>
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -26,5 +27,15 @@
         android:drawableLeft="@drawable/student"
         android:text="Master Mahasiswa"
         android:id="@+id/tampilMahasiswaButton">
+    </Button>
+    <Button
+        android:id="@+id/tampilCuacaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:background="@android:color/transparent"
+        android:drawableRight="@drawable/img_weather_lightning_128"
+        android:text="Cuaca"
+        android:textColor="#fff">
     </Button>
 </GridLayout>
