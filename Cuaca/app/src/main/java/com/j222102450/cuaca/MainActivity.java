@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout _swipeRefreshLayout1;
     private TextView _totalTextView, _buttonViewCityInfo;
 
-
     @SuppressLint("MissingInflateId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

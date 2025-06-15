@@ -12,8 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MenuActivity extends AppCompatActivity {
-    private Button _tampilMahasiswaButton;
-    private Intent _tampilMahasiswaIntent;
+    private Button _tampilMahasiswaButton, _tampilForexButton, _tampilCuacaButton, _tampilForexButton2;
+    private Intent _tampilMahasiswaIntent, _tampilForexIntent, _tampilCuacaIntent, _tampilForexIntent2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,9 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         initTampilMahasiswaButton();
+        initTampilForexButton();
+        initTampilCuacaButton();
+        initTampilForexButton2();
     }
 
     private void initTampilMahasiswaButton()
@@ -40,6 +43,51 @@ public class MenuActivity extends AppCompatActivity {
             {
                 _tampilMahasiswaIntent = new Intent(getApplicationContext(), TampilMahasiswaActivity.class);
                 startActivity(_tampilMahasiswaIntent);
+            }
+        });
+    }
+
+    private void initTampilForexButton()
+    {
+        _tampilForexButton = (Button) findViewById(R.id.tampilForexButton);
+
+        _tampilForexButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                _tampilForexIntent = new Intent(getApplicationContext(), ForexMainActivity.class);
+                startActivity(_tampilForexIntent);
+            }
+        });
+    }
+
+    private void initTampilForexButton2()
+    {
+        _tampilForexButton2 = (Button) findViewById(R.id.tampilForexButton2);
+
+        _tampilForexButton2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                _tampilForexIntent2 = new Intent(getApplicationContext(), ForexMainActivity2.class);
+                startActivity(_tampilForexIntent2);
+            }
+        });
+    }
+
+    private void initTampilCuacaButton()
+    {
+        _tampilCuacaButton = findViewById(R.id.tampilCuacaButton);
+
+        _tampilCuacaButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                _tampilCuacaIntent = new Intent(getApplicationContext(), CuacaMainActivity.class);
+                startActivity(_tampilCuacaIntent);
             }
         });
     }
