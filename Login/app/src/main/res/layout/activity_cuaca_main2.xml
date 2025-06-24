@@ -5,65 +5,47 @@
     android:id="@+id/swipeRefreshLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ForexMainActivity2">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/white"
-            android:scaleType="centerCrop"
-            android:contentDescription="Wallpaper"/>
-
+        android:layout_height="match_parent"
+        android:background="#333333">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@drawable/gradient_a">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:padding="16dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/timestampTextView"
-                android:layout_gravity="center_horizontal"
-                android:padding="8dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:layout_marginBottom="8dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/colonTextView"
-                android:text=""
-                android:textStyle="italic"
-                android:textColor="@color/cardview_dark_background"
-                android:textSize="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"/>
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="#d1e7dd">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timestampTextView"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:text="Tanggal / Waktu kurs"
+                    android:textColor="#0f5132"
+                    android:layout_marginBottom="8dp"/>
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/recyclerView3"
-                android:background="@drawable/gradient_a"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"/>
+                android:id="@+id/recyclerView3"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forex 2"
             android:layout_gravity="center|end"
+            android:layout_marginEnd="50dp"
             android:rotation="90"
             android:textColor="#cccccc"
             android:textSize="50sp"/>
     </FrameLayout>
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

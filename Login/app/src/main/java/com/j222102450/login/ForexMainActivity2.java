@@ -23,7 +23,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -54,47 +57,73 @@ public class ForexMainActivity2 extends AppCompatActivity {
     }
 
     private void bindRecyclerView() {
-        String url = "https://openexchangerates.org/api/latest.json?app_id=287d75acf4fb4699a4e289d4d6c52336";
+        String ratesUrl = "https://openexchangerates.org/api/latest.json?app_id=287d75acf4fb4699a4e289d4d6c52336";
+        String currencyUrl = "https://openexchangerates.org/api/currencies.json";
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        Log.d("jsp", "accessing " + ratesUrl);
 
-        asyncHttpClient.get(url, new AsyncHttpResponseHandler() {
+        asyncHttpClient.get(ratesUrl, new AsyncHttpResponseHandler() {
+            JSONObject ratesObj;
+            long timestamp;
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 //                Log.d("jsp", new String(responseBody));
-                String jsonString = new String(responseBody);
-                JSONObject root;
-
                 try {
-                    root = new JSONObject(jsonString);
-                } catch (JSONException e) {
-                    Toast.makeText(ForexMainActivity2.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                JSONObject rates;
-                long timestamp;
-
-                try {
-                    rates = root.getJSONObject("rates");
+                    JSONObject root = new JSONObject(new String(responseBody));
+                    ratesObj = root.getJSONObject("rates");
                     timestamp = root.getLong("timestamp");
+
+                    double idrRate = ratesObj.getDouble("IDR");
+
+                    asyncHttpClient.get(currencyUrl, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            try {
+                                JSONObject currencies = new JSONObject(new String(responseBody));
+                                List<ForexModel> forexList = new ArrayList<>();
+
+                                Iterator<String> keys = ratesObj.keys();
+                                while (keys.hasNext()) {
+                                    String code = keys.next();
+                                    if (code.equals("IDR")) continue;
+
+                                    try {
+                                        double rate = idrRate / ratesObj.getDouble(code);
+                                        String name = currencies.optString(code, "Unknown");
+                                        forexList.add(new ForexModel(code, name, rate));
+                                    } catch (JSONException e) {
+                                        Log.e("Forex Error", "Gagal Paring untuk " + code, e);
+                                    }
+                                }
+
+                                setTimestamp(timestamp);
+
+                                ForexAdapter adapter = new ForexAdapter(forexList);
+                                _recyclerView3.setLayoutManager(new LinearLayoutManager(ForexMainActivity2.this));
+                                _recyclerView3.setAdapter(adapter);
+                            } catch (JSONException e) {
+                                Toast.makeText(ForexMainActivity2.this, "Gagal parsing data mata uang", Toast.LENGTH_SHORT).show();
+                            }
+
+                            _swipeRefreshLayout3.setRefreshing(false);
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            Toast.makeText(ForexMainActivity2.this, "Gagal ambil nama mata uang", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } catch (JSONException e) {
-                    Toast.makeText(ForexMainActivity2.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
+                    Toast.makeText(ForexMainActivity2.this, "Gagal parsing kurs", Toast.LENGTH_SHORT).show();
+                    _swipeRefreshLayout3.setRefreshing(false);
                 }
-
-                setTimestamp(timestamp);
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForexMainActivity2.this);
-                ForexAdapter adapter = new ForexAdapter(rates);
-                _recyclerView3.setLayoutManager(layoutManager);
-                _recyclerView3.setAdapter(adapter);
-
-                _swipeRefreshLayout3.setRefreshing(false);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(ForexMainActivity2.this, new String(responseBody), Toast.LENGTH_LONG).show();
+                Log.e("jsp", error.getMessage());
+
+                Toast.makeText(ForexMainActivity2.this, "Gagal ambil kurs", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -109,12 +138,6 @@ public class ForexMainActivity2 extends AppCompatActivity {
 
     private void initSwipeRefreshLayout() {
         _swipeRefreshLayout3 = findViewById(R.id.swipeRefreshLayout3);
-
-        _swipeRefreshLayout3.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                bindRecyclerView();
-            }
-        });
+        _swipeRefreshLayout3.setOnRefreshListener(this::bindRecyclerView);
     }
 }
