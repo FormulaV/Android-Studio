@@ -8,60 +8,56 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:contentPadding="10dp">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:id="@+id/buttonView_cityInfo"
-        android:text=""/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <ImageView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/cuacaImageView"/>
-
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="#80ffc107">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:id="@+id/cuacaImageView"
+                    android:src="@mipmap/ic_11d_foreground"/>
+            </com.google.android.material.card.MaterialCardView>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/namaTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Cuaca)"
                     android:textStyle="bold" />
-
                 <TextView
                     android:id="@+id/deskripsiTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Deskripsi)" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/tglWaktuTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Tgl / Waktu)" />
-
                 <TextView
                     android:id="@+id/suhuTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(Suhu)" />
             </LinearLayout>
-
         </LinearLayout>
-
 </androidx.cardview.widget.CardView>

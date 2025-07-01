@@ -19,15 +19,14 @@ import java.util.Date;
 import java.util.List;
 
 public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
-    private Activity _activity;
-    private List<CuacaListModel> listModelList;
+
+    private List<CuacaListModel> _listModelList;
     private CuacaRootModel _rootmodel;
 
-    public CuacaAdapter(Activity activity, CuacaRootModel rm) {
-        this._activity = activity;
+    public CuacaAdapter(CuacaRootModel rm) {
         this._rootmodel = rm;
 
-        listModelList = rm.getListModelList();
+        _listModelList = rm.getListModelList();
     }
 
     @NonNull
@@ -47,7 +46,7 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CuacaViewHolder holder, int position) {
-        CuacaListModel lm = listModelList.get(position);
+        CuacaListModel lm = _listModelList.get(position);
         CuacaWeatherModel wm = lm.getWeatherModelList().get(0);
         CuacaMainModel mm = lm.getMainModel();
 
@@ -113,7 +112,7 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
 //        }
 
         String iconUrl = "https://openweathermap.org/img/wn/" + wm.getIcon() + "@2x.png";
-        Picasso.with(_activity).load(iconUrl).into(holder.cuacaImageView);
+        Picasso.with(holder.itemView.getContext()).load(iconUrl).into(holder.cuacaImageView);
 
         String tanggalWaktuWib = formatWib(lm.getDt_txt());
 
@@ -125,7 +124,7 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
 
     @Override
     public int getItemCount() {
-        return (listModelList != null) ? listModelList.size() : 0;
+        return (_listModelList != null) ? _listModelList.size() : 0;
     }
 
     private String formatWib(String tanggalWaktuGmt_String)
@@ -138,7 +137,9 @@ public class CuacaAdapter extends RecyclerView.Adapter<CuacaViewHolder> {
         try
         {
             tanggalWaktuGmt = sdf.parse(tanggalWaktuGmt_String);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e)
+        {
             Log.e("*jsp", e.getMessage());
         }
 

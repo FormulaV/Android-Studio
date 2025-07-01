@@ -11,36 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#0249A0"
-            android:id="@+id/textView_cityInfo"
-            android:textColor="#ffffff"
-            android:padding="16dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/etKota"
+                android:hint="Masukkan Nama Kota"
+                android:inputType="text"
+                android:text="Pontianak"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTampilkan"
+                android:text="Tampilkan"
+                android:backgroundTint="#ffc107"/>
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonView_cityInfo"
+            android:gravity="center"
+            android:backgroundTint="#ffc107"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/recyclerView1"
             android:layout_weight="1">
         </androidx.recyclerview.widget.RecyclerView>
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/cardview_dark_background"
-            android:padding="16sp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Record : "
-                android:id="@+id/totalTextView"
-                android:textSize="24sp"
-                android:textColor="#ffffff"/>
+            android:text="Total Record : "
+            android:id="@+id/totalTextView"
+            android:textColor="#ffffff"
+            android:background="#ffc107"
+            android:padding="5dp"/>
         </LinearLayout>
-    </LinearLayout>
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

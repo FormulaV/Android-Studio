@@ -14,7 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class CuacaGpsActivity extends AppCompatActivity {
 
-    private WebView webView;
+    private WebView _webView;
+    private TextView _koordinatTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +27,23 @@ public class CuacaGpsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        webView = findViewById(R.id.wvMain);
-
-        TextView textViewCoordinat = findViewById(R.id.textView_koordinat);
 
         Bundle param = getIntent().getBundleExtra("param");
-        textViewCoordinat.setText(param.getDouble("lat") + " x " + param.getDouble("lon"));
+        _koordinatTextView = findViewById(R.id.textView_koordinat);
+        _koordinatTextView.setText(param.getDouble("lat") + " x " + param.getDouble("lon"));
+
+        _webView = findViewById(R.id.wvMain);
 
         String url = "https://www.google.com/maps" +
                 "?q=" + param.getDouble("lat") + "," + param.getDouble("lon") +
                 "&ll=" + param.getDouble("lat") + "," + param.getDouble("lon") +
                 "&z=10";
 
-        WebSettings webSettings = webView.getSettings();
+        WebSettings webSettings = _webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
+        webSettings.setDomStorageEnabled(true);
+
+        _webView.setWebViewClient(new WebViewClient());
+        _webView.loadUrl(url);
     }
 }

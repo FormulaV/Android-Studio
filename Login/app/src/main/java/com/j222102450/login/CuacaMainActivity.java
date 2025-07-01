@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,10 +33,12 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 
 public class CuacaMainActivity extends AppCompatActivity {
+    private EditText _etKota;
+    private MaterialButton _btnTampilkan, _buttonViewCityInfo;
     private RecyclerView _recyclerView2;
     private CuacaRootModel _rootModel;
     private SwipeRefreshLayout _swipeRefreshLayout2;
-    private TextView _totalTextView, _buttonViewCityInfo;
+    private TextView _totalTextView;
 
     @SuppressLint("MissingInflateId")
     @Override
@@ -48,14 +54,17 @@ public class CuacaMainActivity extends AppCompatActivity {
 
         _recyclerView2 = findViewById(R.id.recyclerView2);
         _totalTextView = findViewById(R.id.totalTextView);
+        _etKota = findViewById(R.id.etKota);
 
         initSwipeRefreshLayout();
         initButtonViewCityInfo();
+        initTampilkanButton();
+
         bindRecyclerView1();
     }
 
     private void initButtonViewCityInfo() {
-        _buttonViewCityInfo = findViewById(R.id.textView_cityInfo);
+        _buttonViewCityInfo = findViewById(R.id.buttonView_cityInfo);
 
         _buttonViewCityInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +100,24 @@ public class CuacaMainActivity extends AppCompatActivity {
 
     private void bindRecyclerView1()
     {
-        String url = "https://api.openweathermap.org/data/2.5/forecast?id=1630789&appid=c066400094976a3781669abd1338c074";
+        String namaKota = _etKota.getText().toString().trim();
+        if (namaKota.isEmpty()) {
+            Toast.makeText(CuacaMainActivity.this, "Nama kota tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            namaKota = URLEncoder.encode(namaKota, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        _buttonViewCityInfo.setText("Memuat...");
+
+        String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + namaKota + "&appid=c066400094976a3781669abd1338c074";
+        Log.d("jsp", url);
+
         AsyncHttpClient ahc = new AsyncHttpClient();
 
         ahc.get(url, new AsyncHttpResponseHandler() {
@@ -105,7 +131,7 @@ public class CuacaMainActivity extends AppCompatActivity {
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(CuacaMainActivity.this);
                 _recyclerView2.setLayoutManager(lm);
 
-                CuacaAdapter ca = new CuacaAdapter(CuacaMainActivity.this, _rootModel);
+                CuacaAdapter ca = new CuacaAdapter(_rootModel);
                 _recyclerView2.setAdapter(ca);
 
                 _totalTextView.setText("Total Record : " + ca.getItemCount());
@@ -133,5 +159,13 @@ public class CuacaMainActivity extends AppCompatActivity {
                 "Matahari Terbenam: " + sunsetTime + "(Lokal)";
 
         _buttonViewCityInfo.setText(cityInfo);
+    }
+
+    private void initTampilkanButton() {
+        _btnTampilkan = findViewById(R.id.btnTampilkan);
+
+        _btnTampilkan.setOnClickListener(v -> {
+            bindRecyclerView1();
+        });
     }
 }
